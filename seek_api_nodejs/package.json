@@ -1,0 +1,12 @@
+{
+  "name": "payment-seek",
+  "description": "Payment System - SEEK",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "body-parser": "^1.17.1",
+    "cookie-parser": "^1.4.3",
+    "cookie-session": "^2.0.0-beta.1",
+    "express": "3.x"
+  }
+}
