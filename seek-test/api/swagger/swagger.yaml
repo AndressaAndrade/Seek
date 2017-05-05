@@ -1,0 +1,267 @@
+swagger: "2.0"
+info:
+  version: "0.0.1"
+  title: Checkout
+# during dev, should point to your local machine
+host: localhost:10010
+# basePath prefixes all resource paths 
+basePath: /
+# 
+schemes:
+  # tip: remove http to make production-grade
+  - http
+  - https
+# format of bodies a client can send (Content-Type)
+consumes:
+  - application/json
+# format of the responses to the client (Accepts)
+produces:
+  - application/json
+paths:
+  /customer:
+    # our controller name
+    x-swagger-router-controller: customer
+    get:
+      operationId: getAllCustomer
+      description: get the customers list
+      # define the type of response for Success "200" and Error
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/GetCustomersListResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /deal:
+    # our controller name
+    x-swagger-router-controller: deal
+    get:
+      operationId: getAllDeal
+      description: get the customers list
+      # define the type of response for Success "200" and Error
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/GetDealsListResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /discount:
+    # our controller name
+    x-swagger-router-controller: discount
+    get:
+      operationId: getAllDiscount
+      description: get the discount list
+      # define the type of response for Success "200" and Error
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/GetDiscountsListResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /product:
+    # our controller name
+    x-swagger-router-controller: product
+    get:
+      operationId: getAllProduct
+      description: get the product list
+      # define the type of response for Success "200" and Error
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/GetProductsListResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /swagger:
+    x-swagger-pipe: swagger_raw
+# complex objects have schema definitions
+definitions:
+  # GET /customer successful response
+  GetCustomersListResponse:
+    required:
+      - customers
+    properties:
+      # The array of customers
+      customers:
+        type: array
+        items: 
+          type: object
+          properties:
+            name:
+              type: string
+            product:
+              type: object
+            total:
+              type: number
+  GetCustomerResponse:
+    required:
+      - name
+      - product
+      - total
+    properties:
+      name:
+        type: string
+      product: 
+        type: object
+      total:
+        type: number
+  Customer:
+    type: object
+    properties:
+      name:
+        type: string
+        description: task object name
+      product:
+        type: string
+        description: task description
+    required:
+      - name
+      - product
+  GetDealsListResponse:
+    required:
+      - deals
+    properties:
+      # The array of customers
+      deals:
+        type: array
+        items: 
+          type: object
+          properties:
+            id:
+              type: string
+            title:
+              type: string
+            year:
+              type: number
+  GetDealsResponse:
+    required:
+      - id
+      - title
+      - year
+    properties:
+      id:
+        type: string
+      title: 
+        type: string
+      year:
+        type: number
+  Deal:
+    type: object
+    properties:
+      title:
+        type: string
+        description: task object name
+      year:
+        type: number
+        description: task description
+    required:
+      - title
+      - year
+  GetDiscountsListResponse:
+    required:
+      - discounts
+    properties:
+      # The array of customers
+      discounts:
+        type: array
+        items: 
+          type: object
+          properties:
+            id:
+              type: string
+            title:
+              type: string
+            year:
+              type: number
+  GetDiscountsResponse:
+    required:
+      - id
+      - title
+      - year
+    properties:
+      id:
+        type: string
+      title: 
+        type: string
+      year:
+        type: number
+  Discount:
+    type: object
+    properties:
+      title:
+        type: string
+        description: task object name
+      year:
+        type: number
+        description: task description
+    required:
+      - title
+      - year  
+  GetProductsListResponse:
+    required:
+      - products
+    properties:
+      # The array of customers
+      products:
+        type: array
+        items: 
+          type: object
+          properties:
+            id:
+              type: string
+            title:
+              type: string
+            year:
+              type: number
+  GetProductsResponse:
+    required:
+      - id
+      - title
+      - year
+    properties:
+      id:
+        type: string
+      title: 
+        type: string
+      year:
+        type: number
+  Product:
+    type: object
+    properties:
+      title:
+        type: string
+        description: task object name
+      year:
+        type: number
+        description: task description
+    required:
+      - title
+      - year
+  GeneralResponse:
+    type: object
+    properties:
+      success:
+        type: number
+        description: returns 1 if successful
+      description:
+        type: string
+        description: a short comment 
+    required:
+      - success
+      - description
+  ErrorResponse:
+    required:
+      - message
+    properties:
+      message:
+        type: string
